@@ -44,6 +44,9 @@ const createTask = () => {
     saveTasks();
     displayTasks();
     resetForm();
+    
+    // Add alert for task creation
+    alert('Task created successfully!');
 };
 
 // Function to update a task
@@ -67,6 +70,9 @@ const updateTask = () => {
         };
         saveTasks();
         displayTasks();
+        
+        // Add alert for task update
+        alert('Task updated successfully!');
     }
 
     resetForm();
@@ -95,6 +101,9 @@ const editTask = (taskId) => {
         
         // Scroll to form
         taskForm.scrollIntoView({ behavior: 'smooth' });
+        
+        // Add alert for entering edit mode
+        alert('Editing task. Make your changes and click "Update Task".');
     }
 };
 
@@ -194,16 +203,28 @@ const displayTasks = () => {
 // Function to change task status
 const changeStatus = (taskId) => {
     const task = taskArray.find(t => t.id === taskId);
-    task.status = task.status === 'completed' ? 'pending' : 'completed';
+    const newStatus = task.status === 'completed' ? 'pending' : 'completed';
+    task.status = newStatus;
     saveTasks();
     displayTasks();
+    
+    // Add alert for status change
+    alert(`Task marked as ${newStatus === 'completed' ? 'completed' : 'pending'}!`);
 };
 
 // Function to remove a task
 const removeTask = (taskId) => {
-    taskArray = taskArray.filter(task => task.id !== taskId);
-    saveTasks();
-    displayTasks();
+    // Add confirmation dialog before deletion
+    const confirmDelete = confirm('Are you sure you want to delete this task?');
+    
+    if (confirmDelete) {
+        taskArray = taskArray.filter(task => task.id !== taskId);
+        saveTasks();
+        displayTasks();
+        
+        // Add alert for task deletion
+        alert('Task deleted successfully!');
+    }
 };
 
 // Function to save tasks to local storage
